@@ -4,7 +4,7 @@ public:
         queue<int> q;
         for (int x : nums) q.push(x);
 
-        while (q.size() > 1) {
+        while (q.size() != 1) {
             int n = q.size();
             int prev = q.front();
             q.pop();
