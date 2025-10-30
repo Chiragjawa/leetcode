@@ -6,10 +6,10 @@ public:
       vector<int>mp(256,-1);
       int ans=0;
       while(right<s.size()){
-        if(mp[s[right] -'a'] !=-1){
-            left = max(left, mp[s[right]-'a']+1);
+        if(mp[s[right] ] !=-1){
+            left = max(left, mp[s[right]]+1);
         }        
-        mp[s[right]-'a']= right;
+        mp[s[right]]= right;
         ans = max(ans , right-left+1);
         right++;
       }
