@@ -9,7 +9,6 @@ public:
             for(int j=0;j<n;j++){
                 if(matrix[i][j]<0){
                     cnt++;
-                    cout<<mini<<endl;
                 }
                 if(matrix[i][j] ==0){
                     cnt2++;
