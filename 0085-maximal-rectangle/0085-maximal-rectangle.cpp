@@ -1,58 +1,38 @@
 class Solution {
-private:
-    int largestRectangleArea(vector<int> heights) {
-        stack<int> st;
-        int maxarea = 0;
-        int n = heights.size();
+    int maxarea(vector<int>height){
+        int n = height.size();
+        int maxarea=0;
+        for(int i =0 ;i<n;i++){
+            stack<int>st;
+            int maxi=0;
 
-        for (int i = 0; i < n; i++) {
-            while (!st.empty() && heights[st.top()] > heights[i]) {
-                int element = st.top(); st.pop();
-                int pse = st.empty() ? -1 : st.top();
-                int nse = i;
-                maxarea = max(maxarea, heights[element] * (nse - pse - 1));
+            for(int i =0;i<=n;i++){
+                int h = (i==n)? 0 : height[i];
+                while(!st.empty() && h<height[st.top()]){
+                    int hei = height[st.top()];
+                    st.pop();
+                    int width = st.empty() ? i : i-st.top() -1;
+                    maxi = max(maxi,hei*width);
+                }
+                st.push(i);
             }
-            st.push(i);
+            maxarea = max(maxarea , maxi);
         }
-
-        while (!st.empty()) {
-            int element = st.top(); st.pop();
-            int pse = st.empty() ? -1 : st.top();
-            int nse = heights.size();
-            maxarea = max(maxarea, heights[element] * (nse - pse - 1));
-        }
-
         return maxarea;
     }
-
 public:
     int maximalRectangle(vector<vector<char>>& matrix) {
-        if (matrix.empty() || matrix[0].empty()) return 0;
-
         int n = matrix.size();
         int m = matrix[0].size();
-        int maxarea = 0;
-
-        // Step 1: Build column-wise prefix sum
-        vector<vector<int>> heights(n, vector<int>(m, 0));
-
-        for (int j = 0; j < m; j++) {
-            int sum = 0;
-            for (int i = 0; i < n; i++) {
-                if (matrix[i][j] == '0') {
-                    sum = 0;
-                } else {
-                    sum += (matrix[i][j] - '0');
-                }
-                heights[i][j] = sum;
+        vector<int>height(m);
+        for(int i =0;i<n;i++){
+            for(int j=0;j<m;j++){
+                if(matrix[i][j] == '1') height[j]++;
+                cout<<height[j];
             }
+            cout<<endl;
         }
 
-        // Step 2: Use each row of heights[] as histogram
-        for (int i = 0; i < n; i++) {
-            maxarea = max(maxarea, largestRectangleArea(heights[i]));
-        }
-
-        return maxarea;
+        return maxarea(height);
     }
 };
