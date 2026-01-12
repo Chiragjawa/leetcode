@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int minTimeToVisitAllPoints(vector<vector<int>>& points) {
+        int ans =0;
+        for(int i = 0 ;i<points.size()-1;i++){
+            int maxi = max(abs(points[i+1][0]-points[i][0]),abs(points[i+1][1]-points[i][1]));
+            cout<<maxi<<endl;
+            ans = ans+maxi;
+        }
+        return ans;
+    }
+};
