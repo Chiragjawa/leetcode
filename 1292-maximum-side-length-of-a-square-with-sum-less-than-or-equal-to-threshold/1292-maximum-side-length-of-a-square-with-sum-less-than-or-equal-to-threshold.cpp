@@ -49,7 +49,7 @@ public:
             }
             if(sum> threshold) return sum;
         }
-        cout << sum << endl;
+
         return sum;
     }
 };
